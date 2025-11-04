@@ -3,24 +3,42 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart'; // Asegúrate de tener este import
 
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart'; // Asegúrate de tener este import
+
 // --- LA PANTALLA PRINCIPAL ---
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   // Lista de imágenes (reemplaza esto con tus nombres de archivo)
   final List<String> dummyImages = const [
+
     'assets/images/img1.png',
+
     'assets/images/img2.png',
+
     'assets/images/img3.png',
+
     'assets/images/img4.png',
+
     'assets/images/img5.png',
+
     'assets/images/img6.png',
+
     'assets/images/img7.png',
+
     'assets/images/img8.png',
+
     'assets/images/img9.png',
+
     'assets/images/img10.png',
+
     'assets/images/img11.png',
+
     'assets/images/img12.png',
+
   ];
 
   @override
@@ -39,16 +57,19 @@ class HomeScreen extends StatelessWidget {
                   // 1. HEADER (TÍTULO)
                   _Header(),
 
-                  // 2. TEXTO INTRODUCTORIO (¡NUEVO!)
+                  // 2. TEXTO INTRODUCTORIO (¡ACTUALIZADO!)
                   _IntroText(),
 
-                  // 3. ENCABEZADO DE GALERÍA (¡NUEVO!)
+                  // 3. TEXTO DE TÉCNICAS (¡NUEVO!)
+                  _TechniquesText(),
+
+                  // 4. ENCABEZADO DE GALERÍA
                   _GalleryHeader(),
                   
-                  // 4. GALERÍA DE IMÁGENES
+                  // 5. GALERÍA DE IMÁGENES
                   _ImageGallery(images: dummyImages),
                   
-                  // 5. FOOTER (CONTACTO)
+                  // 6. FOOTER (CONTACTO)
                   _Footer(),
                 ],
               ),
@@ -82,22 +103,35 @@ class _Header extends StatelessWidget {
   }
 }
 
-// --- 2. TEXTO INTRODUCTORIO (¡NUEVO!) ---
+// --- 2. TEXTO INTRODUCTORIO (¡ACTUALIZADO!) ---
 class _IntroText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    const Color colorTexto = Color(0xFF6D5F5C);
+    
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 32.0).copyWith(bottom: 50.0),
       child: ConstrainedBox(
         constraints: const BoxConstraints(maxWidth: 700), // Limitamos ancho del texto
-        child: Text(
-          "Bienvenidos. En este taller, cada pieza es una obra única de artesanía, moldeada con paciencia y llena de dedicación. Creemos que la cerámica es más que arcilla; es una forma de conectar con la tierra y transformar lo simple en algo extraordinario.",
+        child: RichText(
           textAlign: TextAlign.center,
-          style: GoogleFonts.lato(
-            fontSize: 20,
-            height: 1.6, // Interlineado para mejor lectura
-            fontWeight: FontWeight.w400,
-            color: const Color(0xFF6D5F5C).withOpacity(0.9),
+          text: TextSpan(
+            // Estilo por defecto para todo el párrafo
+            style: GoogleFonts.lato(
+              fontSize: 20,
+              height: 1.6, // Interlineado para mejor lectura
+              fontWeight: FontWeight.w400,
+              color: colorTexto.withOpacity(0.9),
+            ),
+            children: const [
+              TextSpan(text: "Bienvenidos a nuestro refugio. Más que un taller, este es un espacio donde la calma y las manos se encuentran.\n\n"),
+              TextSpan(text: "Aquí, cada pieza es un diálogo con la arcilla; una obra de artesanía única que nace sin apuros, moldeada con la paciencia que solo el oficio artesanal conoce. Creemos que la cerámica es un "),
+              TextSpan(
+                text: "latido de la tierra", 
+                style: TextStyle(fontWeight: FontWeight.w700, fontStyle: FontStyle.italic)
+              ),
+              TextSpan(text: ". Es una forma de conectar con lo elemental y transformar un material simple en algo extraordinario, que lleva la huella de quien lo creó. Cada objeto es irrepetible y está lleno de dedicación."),
+            ],
           ),
         ),
       ),
@@ -105,12 +139,76 @@ class _IntroText extends StatelessWidget {
   }
 }
 
-// --- 3. ENCABEZADO DE GALERÍA (¡NUEVO!) ---
+// --- 3. TEXTO DE TÉCNICAS (¡NUEVO!) ---
+class _TechniquesText extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    const Color colorTexto = Color(0xFF6D5F5C);
+
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 32.0, vertical: 40.0),
+      margin: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 30.0),
+      constraints: const BoxConstraints(maxWidth: 900),
+      decoration: BoxDecoration(
+        color: Colors.white.withOpacity(0.3), // Un fondo sutil
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: colorTexto.withOpacity(0.2), width: 1),
+      ),
+      child: RichText(
+        textAlign: TextAlign.center,
+        text: TextSpan(
+          style: GoogleFonts.lato(
+            fontSize: 19,
+            height: 1.5,
+            fontWeight: FontWeight.w400,
+            color: colorTexto,
+          ),
+          children: [
+            TextSpan(
+              text: "Técnica, Oficio y Aprendizaje\n",
+              style: GoogleFonts.lora(
+                fontSize: 28,
+                fontWeight: FontWeight.w600,
+                color: colorTexto,
+                height: 1.8
+              ),
+            ),
+            const TextSpan(text: "Nuestro trabajo explora un mundo de posibilidades, combinando técnicas ancestrales y modernas. Desde la precisión y la calma del "),
+            const TextSpan(text: "torno alfarero", style: TextStyle(fontWeight: FontWeight.w700)),
+            const TextSpan(text: " hasta la libertad del "),
+            const TextSpan(text: "modelado manual", style: TextStyle(fontWeight: FontWeight.w700)),
+            const TextSpan(text: " (como el pellizco o los colombinos), cada método ofrece un camino distinto.\n\n"),
+            const TextSpan(text: "Nos especializamos en "),
+            const TextSpan(text: "esgrafiado", style: TextStyle(fontWeight: FontWeight.w700)),
+            const TextSpan(text: " para crear texturas y dibujos únicos sobre la superficie, y jugamos con el fuego y los "),
+            const TextSpan(text: "esmaltes", style: TextStyle(fontWeight: FontWeight.w700)),
+            const TextSpan(text: " para lograr paletas de colores irrepetibles.\n\n"),
+            TextSpan(
+              text: "Si sentís la curiosidad de crear, también abrimos las puertas del taller. Ofrecemos ",
+              style: TextStyle(color: colorTexto.withOpacity(0.9)),
+            ),
+            TextSpan(
+              text: "clases",
+              style: TextStyle(fontWeight: FontWeight.w700, color: colorTexto),
+            ),
+            TextSpan(
+              text: " para todos los niveles, donde podés desconectar de la rutina y aprender a crear tus propias piezas desde cero.",
+              style: TextStyle(color: colorTexto.withOpacity(0.9)),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+
+// --- 4. ENCABEZADO DE GALERÍA ---
 class _GalleryHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 24.0).copyWith(bottom: 30.0),
+      padding: const EdgeInsets.symmetric(horizontal: 24.0).copyWith(bottom: 30.0, top: 30.0),
       child: Text(
         "Explora Nuestro Trabajo",
         style: GoogleFonts.lora(
@@ -124,7 +222,7 @@ class _GalleryHeader extends StatelessWidget {
 }
 
 
-// --- 4. GALERÍA ---
+// --- 5. GALERÍA ---
 class _ImageGallery extends StatelessWidget {
   final List<String> images;
   const _ImageGallery({required this.images});
@@ -176,22 +274,19 @@ class _ImageTile extends StatefulWidget {
 class _ImageTileState extends State<_ImageTile> {
   bool _isHovered = false;
 
- void _showImageDialog(BuildContext context) {
+  void _showImageDialog(BuildContext context) {
     showDialog(
       context: context,
       builder: (ctx) => Dialog(
         backgroundColor: Colors.transparent,
         elevation: 0,
         child: Column(
-          mainAxisSize: MainAxisSize.min, // Esto es clave para que la columna no ocupe toda la pantalla
+          mainAxisSize: MainAxisSize.min, // Esto es clave
           children: [
-
-            // --- INICIO DE LA CORRECCIÓN ---
-            // Envolvemos la imagen en Flexible para que se achique
-            // si no hay espacio vertical suficiente.
+            // --- CORRECCIÓN DE OVERFLOW ---
             Flexible(
               child: ClipRRect(
-            // --- FIN DE LA CORRECCIÓN ---
+            // --- FIN CORRECCIÓN ---
                 borderRadius: BorderRadius.circular(12),
                 child: Image.asset(
                   widget.imagePath,
@@ -199,7 +294,6 @@ class _ImageTileState extends State<_ImageTile> {
                 ),
               ),
             ),
-
             const SizedBox(height: 16),
             TextButton(
               style: TextButton.styleFrom(
@@ -267,7 +361,7 @@ class _ImageTileState extends State<_ImageTile> {
   }
 }
 
-// --- 5. FOOTER ---
+// --- 6. FOOTER ---
 class _Footer extends StatelessWidget {
   
   // Función helper para lanzar URLs
@@ -331,14 +425,7 @@ class _Footer extends StatelessWidget {
               _launchURL('https://www.google.com/maps/search/?api=1&query=Fray+castañeda+2488,+Ricardo+Rojas');
             },
           ),
-          const SizedBox(height: 40),
-          Text(
-            '© ${DateTime.now().year} Taller de Cerámica Ricardo Rojas. Todos los derechos reservados.',
-            style: TextStyle(
-              fontSize: 12,
-              color: colorTexto.withOpacity(0.7),
-            ),
-          ),
+        
         ],
       ),
     );
@@ -383,10 +470,8 @@ class _InfoRow extends StatelessWidget {
                     fontSize: 18,
                     fontWeight: FontWeight.w500,
                     color: colorTexto,
-                    // Dejamos el subrayado constante para que sea obvio que es un link
-                    decoration: TextDecoration.underline,
-                    decorationThickness: 0.5,
-                    decorationColor: colorTexto.withOpacity(0.8),
+                    // --- CORREGIDO SIN SUBRAYADO ---
+                    decoration: TextDecoration.none,
                   ),
                 ),
               ),
